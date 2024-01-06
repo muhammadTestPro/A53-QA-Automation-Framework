@@ -13,17 +13,18 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void loginValidEmailPassword() {
-        try{
-            provideEmail("demo@class.com");
+    public void loginValidEmailPassword() throws InterruptedException{
+        //try{
+            provideEmail("demo123@class.com");
             providePassword("te$t$tudent");
             clickSubmit();
+            Thread.sleep(2000);
             //Assertion
             WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
             Assert.assertTrue(avatarIcon.isDisplayed());
-        } catch (Exception e){
-            System.out.println("Something went wrong." +e);
-        }
+        //} catch (Exception e){
+           // System.out.println("Something went wrong." +e);
+        //}
     }
 
     @Test
