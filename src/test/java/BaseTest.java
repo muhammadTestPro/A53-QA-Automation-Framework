@@ -4,13 +4,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
 public class BaseTest {
+
+    //Data Providers
+    @DataProvider(name="InvalidLoginData")
+    public static Object[][] getDataFromDataProviders(){
+        return new Object[][] {
+                {"invalid@mail.com", "invalidPassword"},
+                {"demo@class.com", ""},
+                {"", "te$t$tudent"},
+                {"",""}
+        };
+    }
 
     public WebDriver driver;
 
@@ -21,8 +30,9 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
     }
 
+    @Parameters({"BaseUrl"})
     @BeforeMethod
-    public void launchBrowser(){
+    public void launchBrowser(String BaseUrl){
         //Chrome Options
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -30,8 +40,9 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+        //String url = BaseUrl;
         //Navigate to Url
-        navigateToUrl();
+        navigateToUrl(BaseUrl);
     }
 
     @AfterMethod
@@ -57,7 +68,7 @@ public class BaseTest {
     }
 
     //Helper Method
-    public void navigateToUrl(){
-        driver.get(url);
+    public void navigateToUrl(String givenUrl){
+        driver.get(givenUrl);
     }
 }
