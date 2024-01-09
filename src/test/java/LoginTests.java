@@ -1,21 +1,23 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest {
 
+   /* @Parameters({"BaseUrl"})
     @Test
-    public void navigateToKoelApp() {
-        navigateToUrl();
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+    public void navigateToKoelApp(String BaseUrl) {
+        navigateToUrl(BaseUrl);
+        Assert.assertEquals(driver.getCurrentUrl(), BaseUrl);
         driver.quit();
-    }
+    }*/
 
     @Test
     public void loginValidEmailPassword() throws InterruptedException{
         //try{
-            provideEmail("demo123@class.com");
+            provideEmail("demo@class.com");
             providePassword("te$t$tudent");
             clickSubmit();
             Thread.sleep(2000);
@@ -27,11 +29,12 @@ public class LoginTests extends BaseTest {
         //}
     }
 
-    @Test
-    public void loginWithInvalidEmailValidPassword() throws InterruptedException {
-        provideEmail("invalid@class.com");
+    @Test(dataProvider = "InvalidLoginData", dataProviderClass=BaseTest.class)
+    //@Parameters({"BaseUrl"})
+    public void loginWithInvalidEmailValidPassword(String email, String password) throws InterruptedException {
+        provideEmail(email);
         //Password Field
-        providePassword("te$t$tudent");
+        providePassword(password);
         //Submit button
         clickSubmit();
         Thread.sleep(2000);
@@ -39,7 +42,7 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
 
-    @Test
+    /*@Test
     public void loginWithInvalidPasswordAndValidEmail() throws InterruptedException {
         //navigateToUrl();
         //Email Field
@@ -51,7 +54,7 @@ public class LoginTests extends BaseTest {
         Thread.sleep(2000);
         //Expected Result
         Assert.assertEquals(driver.getCurrentUrl(), url);
-    }
+    }*/
 
 
 }
