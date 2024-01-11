@@ -23,8 +23,8 @@ public class LoginTests extends BaseTest {
             clickSubmit();
             //Thread.sleep(2000);
             //Assertion
-            WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
-            //WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
+            //WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+            WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
             Assert.assertTrue(avatarIcon.isDisplayed());
         //} catch (Exception e){
            // System.out.println("Something went wrong." +e);
