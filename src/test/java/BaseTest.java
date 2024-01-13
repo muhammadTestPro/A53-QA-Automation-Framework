@@ -2,6 +2,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -31,6 +32,8 @@ public class BaseTest {
 
     public String url = "https://qa.koel.app/";
 
+    public Actions actions;
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -54,6 +57,7 @@ public class BaseTest {
                 .pollingEvery(Duration.ofSeconds(5))
                 .ignoring(NoSuchElementException.class);
                 //.ignoring(NoAlertPresentException.class);
+        actions = new Actions(driver);
         driver.manage().window().maximize();
         //String url = BaseUrl;
         //Navigate to Url
@@ -89,4 +93,11 @@ public class BaseTest {
     public void navigateToUrl(String givenUrl){
         driver.get(givenUrl);
     }
+
+    public void loginToKoelApp(){
+        provideEmail("demo@class.com");
+        providePassword("te$t$tudent");
+        clickSubmit();
+    }
+
 }
