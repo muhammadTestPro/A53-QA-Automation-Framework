@@ -27,14 +27,15 @@ public class Homework19 extends BaseTest{
     }
 
     public void openPlayList() {
-        WebElement emptyPlaylist = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(By.xpath("//section[@id='playlists']//li[7]")));
+        //WebElement emptyPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']//li[9]")));
+        WebElement emptyPlaylist = fluentWait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.cssSelector("//section[@id='playlists']//li[9]")));
         emptyPlaylist.click();
     }
 
     public String getDeletedPlaylistMsg(){
-        //WebElement notificationmsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
-        WebElement notificationMsg = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        WebElement notificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        //WebElement notificationMsg = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         //return notificationmsg.getText();
         return notificationMsg.getText();
     }

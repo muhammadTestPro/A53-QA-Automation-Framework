@@ -45,15 +45,15 @@ public class BaseTest {
         //Manage Browser - wait for 10 seconds before failing/quitting.
         driver = new ChromeDriver(options);
         //Implicit Wait
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         //Explicit Wait
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         //Fluent Wait
         fluentWait = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofSeconds(5))
-                .ignoring(NoSuchElementException.class)
-                .ignoring(NoAlertPresentException.class);
+                .ignoring(NoSuchElementException.class);
+                //.ignoring(NoAlertPresentException.class);
         driver.manage().window().maximize();
         //String url = BaseUrl;
         //Navigate to Url
