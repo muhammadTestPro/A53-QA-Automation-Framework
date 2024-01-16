@@ -1,3 +1,5 @@
+import Pages.HomePage;
+import Pages.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -57,6 +59,36 @@ public class LoginTests extends BaseTest {
         //Expected Result
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }*/
+
+
+    /**
+     * Test Script using Page Object Model.
+     * Locators used in these test were located using By abstract class.
+     */
+    @Test
+    public void loginWithCorrectCredentials(){
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        loginPage.login();
+
+        /*loginPage.provideEmail("demo@class.com");
+        loginPage.providePassword("te$t$tudent");
+        loginPage.clickSubmit();*/
+
+        Assert.assertTrue(homePage.getUserAvatarIcon().isDisplayed());
+    }
+
+    @Test
+    public void loginWithInCorrectCredentials(){
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.provideEmail("demo1@class.com");
+        loginPage.providePassword("test$tudent");
+        loginPage.clickSubmit();
+
+        Assert.assertTrue(homePage.getUserAvatarIcon().isDisplayed());
+    }
 
 
 }
